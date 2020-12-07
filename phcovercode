@@ -1,0 +1,11 @@
+#The data for this code can be found in phcoverdata.csv
+aggregate(soilph ~ pccover, data = phcoverdata, mean)
+aggregate(soilph ~ pccover, data = phcoverdata, calcSE)
+pHcover <- lm(soilph ~ pccover, data = phcoverdata)
+pHcover.sum <- summary(pHcover)
+phcover.ci <- confint(pHcover)
+plot(phcoverdata$soilph ~ phcoverdata$pccover)
+plot(phcoverdata$soilph ~ phcoverdata$area)
+plot(phcoverdata$pccover ~ phcoverdata$area)
+abline(pHcover)
+calcSE <- function(x){sd(x)/sqrt(length(x))}
